@@ -158,51 +158,35 @@ local Button = mainTab:CreateButton({
 
 
 local Toggle = mainTab:CreateToggle({
-    Name = "Auto Kill all, version Gears; use Rocket item",
+    Name = "Kill all, version; gear, equip the Rocket item",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
-        getgenv().autoRocket = Value
+        getgenv().autoRocketEnabled = Value
 
         if Value then
             task.spawn(function()
-                function getNil(name, class)
-                    for _, v in next, getnilinstances() do
-                        if v.ClassName == class and v.Name == name then
-                            return v
-                        end
-                    end
-                end
+                local Players = game:GetService("Players")
+                local LocalPlayer = Players.LocalPlayer
 
-                local rocket = getNil("RocketLauncher", "Tool")
-                if not rocket then return end
-                local fire = rocket:WaitForChild("fire")
-
-                while getgenv().autoRocket do
-                    for _, target in pairs(game.Players:GetPlayers()) do
-                        if target ~= game.Players.LocalPlayer then
-                            local function isAlive(plr)
-                                return plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
-                            end
-
-                            while getgenv().autoRocket and isAlive(target) do
-                                local myChar = game.Players.LocalPlayer.Character
-                                local myRoot = myChar and myChar:FindFirstChild("HumanoidRootPart")
-                                local theirRoot = target.Character and target.Character:FindFirstChild("HumanoidRootPart")
-
-                                if myRoot and theirRoot then
-                                    local direction = (theirRoot.Position - myRoot.Position).Unit
-                                    local args = { [1] = direction }
-                                    fire:FireServer(unpack(args))
-                                end
+                while getgenv().autoRocketEnabled do
+                    for _, targetPlayer in pairs(Players:GetPlayers()) do
+                        if targetPlayer ~= LocalPlayer and targetPlayer.Character then
+                            local hrp = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+                            local myChar = LocalPlayer.Character
+                            if hrp and myChar and myChar:FindFirstChild("RocketLauncher") then
+                                local direction = (hrp.Position - myChar.HumanoidRootPart.Position).Unit
+                                local args = { direction }
+                                myChar.RocketLauncher.fire:FireServer(unpack(args))
                                 task.wait(0.1)
                             end
                         end
                     end
+                    task.wait(0.1)
                 end
             end)
         else
-            getgenv().autoRocket = false
+            getgenv().autoRocketEnabled = false
         end
     end
 })
