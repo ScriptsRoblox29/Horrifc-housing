@@ -124,6 +124,38 @@ local Toggle = mainTab:CreateToggle({
     end
 })
 
+local Button = mainTab:CreateButton({
+    Name = "Use a random potion",
+    Callback = function()
+        local args = {
+            [1] = true
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("EventRemotes"):WaitForChild("Potion"):FireServer(unpack(args))
+    end
+})
+
+
+local Button = mainTab:CreateButton({
+    Name = "bypass Cooldown of Flute; equip flute item",
+    Callback = function()
+        function getNil(name, class)
+            for _, v in next, getnilinstances() do
+                if v.ClassName == class and v.Name == name then
+                    return v
+                end
+            end
+        end
+
+        local args = {
+            [1] = 1,
+            [2] = getNil("Handle", "Part")
+        }
+
+        getNil("Flute", "Tool"):WaitForChild("Remote"):FireServer(unpack(args))
+    end
+})
+
 
  
   Rayfield:Notify({
