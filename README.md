@@ -38,7 +38,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
  
  
  local Toggle = mainTab:CreateToggle({
-    Name = "Auto Rocket all; use Rocket item",
+    Name = "Auto Kill all; use Rocket item",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
@@ -156,6 +156,56 @@ local Button = mainTab:CreateButton({
     end
 })
 
+
+local Toggle = mainTab:CreateToggle({
+    Name = "Auto Kill all, version Gears; use Rocket item",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().autoRocket = Value
+
+        if Value then
+            task.spawn(function()
+                function getNil(name, class)
+                    for _, v in next, getnilinstances() do
+                        if v.ClassName == class and v.Name == name then
+                            return v
+                        end
+                    end
+                end
+
+                local rocket = getNil("RocketLauncher", "Tool")
+                if not rocket then return end
+                local fire = rocket:WaitForChild("fire")
+
+                while getgenv().autoRocket do
+                    for _, target in pairs(game.Players:GetPlayers()) do
+                        if target ~= game.Players.LocalPlayer then
+                            local function isAlive(plr)
+                                return plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+                            end
+
+                            while getgenv().autoRocket and isAlive(target) do
+                                local myChar = game.Players.LocalPlayer.Character
+                                local myRoot = myChar and myChar:FindFirstChild("HumanoidRootPart")
+                                local theirRoot = target.Character and target.Character:FindFirstChild("HumanoidRootPart")
+
+                                if myRoot and theirRoot then
+                                    local direction = (theirRoot.Position - myRoot.Position).Unit
+                                    local args = { [1] = direction }
+                                    fire:FireServer(unpack(args))
+                                end
+                                task.wait(0.1)
+                            end
+                        end
+                    end
+                end
+            end)
+        else
+            getgenv().autoRocket = false
+        end
+    end
+})
 
  
   Rayfield:Notify({
