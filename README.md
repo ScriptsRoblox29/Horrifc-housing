@@ -243,6 +243,35 @@ local Toggle = mainTab:CreateToggle({
     end
 })
 
+
+local Toggle = mainTab:CreateToggle({
+    Name = "Kill all 2; equip SnowBall",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().autoKillEnabled = Value
+
+        if Value then
+            task.spawn(function()
+                while getgenv().autoKillEnabled do
+                    for _, targetPlayer in pairs(game.Players:GetPlayers()) do
+                        if targetPlayer ~= game.Players.LocalPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            local targetPos = targetPlayer.Character.HumanoidRootPart.Position
+                            local args = {
+                                targetPos
+                            }
+                            game:GetService("Players").LocalPlayer.Character.Snowball.remote:FireServer(unpack(args))
+                            task.wait(0.1)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            getgenv().autoKillEnabled = false
+        end
+    end
+})
  
   Rayfield:Notify({
      Title = "Script by Not's server",
@@ -253,8 +282,8 @@ local Toggle = mainTab:CreateToggle({
 
 
 Rayfield:Notify({
-     Title = "I recommend leaving videos, comments etc as private or only people with a link can enter, This makes the devs not censor and the script last longer.",
-     Content = "!!",
+     Title = "Important",
+     Content = "I recommend leaving videos, comments etc as private or only people with a link can enter, This makes the devs not censor and the script last longer",
      Duration = 15,
      Image = 4483362458,
   })
