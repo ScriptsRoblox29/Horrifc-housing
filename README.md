@@ -158,26 +158,78 @@ local Button = mainTab:CreateButton({
 
 
 local Toggle = mainTab:CreateToggle({
-    Name = "Kill all, version; gear, equip the Rocket item",
+    Name = "Auto Kill all, version Gears; use Rocket item",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
-        getgenv().autoRocketEnabled = Value
+        getgenv().autoRocket = Value
+
+        if Value then
+            task.spawn(function()
+                function getNil(name, class)
+                    for _, v in next, getnilinstances() do
+                        if v.ClassName == class and v.Name == name then
+                            return v
+                        end
+                    end
+                end
+
+                local rocket = getNil("RocketLauncher", "Tool")
+                if not rocket then return end
+                local fire = rocket:WaitForChild("fire")
+
+                while getgenv().autoRocket do
+                    for _, target in pairs(game.Players:GetPlayers()) do
+                        if target ~= game.Players.LocalPlayer then
+                            local function isAlive(plr)
+                                return plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+                            end
+
+                            while getgenv().autoRocket and isAlive(target) do
+                                local myChar = game.Players.LocalPlayer.Character
+                                local myRoot = myChar and myChar:FindFirstChild("HumanoidRootPart")
+                                local theirRoot = target.Character and target.Character:FindFirstChild("HumanoidRootPart")
+
+                                if myRoot and theirRoot then
+                                    local direction = (theirRoot.Position - myRoot.Position).Unit
+                                    local args = { [1] = direction }
+                                    fire:FireServer(unpack(args))
+                                end
+                                task.wait(0.1)
+                            end
+                        end
+                    end
+                end
+            end)
+        else
+            getgenv().autoRocket = false
+        end
+    end
+})
+
+local Toggle = visualsTab:CreateToggle({
+    Name = "attack others with coco; equip coconut",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().autoCoconut = Value
 
         if Value then
             task.spawn(function()
                 local Players = game:GetService("Players")
                 local LocalPlayer = Players.LocalPlayer
 
-                while getgenv().autoRocketEnabled do
-                    for _, targetPlayer in pairs(Players:GetPlayers()) do
-                        if targetPlayer ~= LocalPlayer and targetPlayer.Character then
-                            local hrp = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
-                            local myChar = LocalPlayer.Character
-                            if hrp and myChar and myChar:FindFirstChild("RocketLauncher") then
-                                local direction = (hrp.Position - myChar.HumanoidRootPart.Position).Unit
-                                local args = { direction }
-                                myChar.RocketLauncher.fire:FireServer(unpack(args))
+                while getgenv().autoCoconut do
+                    local myChar = LocalPlayer.Character
+                    if myChar and myChar:FindFirstChild("Coconut") and myChar:FindFirstChild("HumanoidRootPart") then
+                        local spawnPos = myChar.HumanoidRootPart.Position
+                        for _, targetPlayer in pairs(Players:GetPlayers()) do
+                            if targetPlayer ~= LocalPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("UpperTorso") then
+                                local args = {
+                                    spawnPos,
+                                    targetPlayer.Character.UpperTorso
+                                }
+                                myChar.Coconut.throwEvent:FireServer(unpack(args))
                                 task.wait(0.1)
                             end
                         end
@@ -186,7 +238,7 @@ local Toggle = mainTab:CreateToggle({
                 end
             end)
         else
-            getgenv().autoRocketEnabled = false
+            getgenv().autoCoconut = false
         end
     end
 })
@@ -198,4 +250,3 @@ local Toggle = mainTab:CreateToggle({
      Duration = 6.5,
      Image = 4483362458,
   })
-  
