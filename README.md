@@ -217,7 +217,7 @@ local Toggle = mainTab:CreateToggle({
 })
 
 
-local Input = visualsTab:CreateInput({
+local Input = mainTab:CreateInput({
     Name = "Coconut Count; important for kill all 4",
     CurrentValue = "",
     PlaceholderText = "Enter number of coconuts",
