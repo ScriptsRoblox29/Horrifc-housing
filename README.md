@@ -295,6 +295,46 @@ local Toggle = mainTab:CreateToggle({
         end
     end
 })
+
+local Toggle = mainTab:CreateToggle({
+    Name = "NoCooldown katana",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().katanaLoop = Value
+
+        if Value then
+            task.spawn(function()
+                while getgenv().katanaLoop do
+                    game:GetService("Players").LocalPlayer.Character.Katana.Event:FireServer()
+                    task.wait(0.01)
+                end
+            end)
+        else
+            getgenv().katanaLoop = false
+        end
+    end
+})
+
+local Toggle = mainTab:CreateToggle({
+    Name = "NoCooldown Blade (dueling sword)",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().bladeLoop = Value
+
+        if Value then
+            task.spawn(function()
+                while getgenv().bladeLoop do
+                    game:GetService("Players").LocalPlayer.Character.Blade.Event:FireServer()
+                    task.wait(0.01)
+                end
+            end)
+        else
+            getgenv().bladeLoop = false
+        end
+    end
+})
  
   Rayfield:Notify({
      Title = "Script by Not's server",
