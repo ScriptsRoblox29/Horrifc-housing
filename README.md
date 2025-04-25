@@ -70,43 +70,28 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 
 local Toggle = mainTab:CreateToggle({
-    Name = "Auto Freeze all; use Freeze ray item",
+    Name = "Freeze all; use freeze ray",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
-        getgenv().autoFreezeEnabled = Value
+        getgenv().target = Value
 
         if Value then
             task.spawn(function()
-                local Players = game:GetService("Players")
-                local LocalPlayer = Players.LocalPlayer
+                local player = game.Players.LocalPlayer
 
-                while getgenv().autoFreezeEnabled do
-                    for _, targetPlayer in pairs(Players:GetPlayers()) do
-                        if not getgenv().autoFreezeEnabled then return end
-                        if targetPlayer ~= LocalPlayer then
-                            local targetChar = targetPlayer.Character
-                            local localChar = LocalPlayer.Character
-                            local targetHRP = targetChar and targetChar:FindFirstChild("HumanoidRootPart")
-                            local localHRP = localChar and localChar:FindFirstChild("HumanoidRootPart")
-
-                            if targetHRP and localHRP then
-                                local direction = (targetHRP.Position - localHRP.Position).Unit
-                                local args = {
-                                    [1] = direction
-                                }
-                                local freezeRay = localChar:FindFirstChild("Freeze Ray")
-                                if freezeRay and freezeRay:FindFirstChild("fire") then
-                                    freezeRay.fire:FireServer(unpack(args))
-                                end
-                            end
+                while getgenv().alvoPosicao do
+                    for _, target in ipairs(game.Players:GetPlayers()) do
+                        if target ~= player and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+                            local pos = target.Character.HumanoidRootPart.Position
+                            player:WaitForChild("Event"):FireServer(pos)
+                            task.wait(0)
                         end
                     end
-                    task.wait(0)
                 end
             end)
         else
-            getgenv().autoFreezeEnabled = false
+            getgenv().target = false
         end
     end
 })
