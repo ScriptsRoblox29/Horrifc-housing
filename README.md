@@ -124,17 +124,6 @@ local Toggle = mainTab:CreateToggle({
     end
 })
 
-local Button = mainTab:CreateButton({
-    Name = "Use a random potion",
-    Callback = function()
-        local args = {
-            [1] = true
-        }
-
-        game:GetService("ReplicatedStorage"):WaitForChild("EventRemotes"):WaitForChild("Potion"):FireServer(unpack(args))
-    end
-})
-
 
 local Button = mainTab:CreateButton({
     Name = "bypass Cooldown of Flute; equip flute item",
@@ -260,8 +249,13 @@ local Toggle = mainTab:CreateToggle({
 })
 
 
+local itemsTab = Window:CreateTab("Items", "crosshair")
+ 
+  local Section = itemsTab:CreateSection("Items Settings")
 
-local Toggle = mainTab:CreateToggle({
+
+
+local Toggle = itemsTab:CreateToggle({
     Name = "NoCooldown Blade (dueling sword)",
     CurrentValue = false,
     Flag = "Toggle1",
@@ -281,7 +275,7 @@ local Toggle = mainTab:CreateToggle({
     end
 })
 
-local Toggle = mainTab:CreateToggle({
+local Toggle = itemsTab:CreateToggle({
     Name = "NoCooldown Sword",
     CurrentValue = false,
     Flag = "Toggle1",
@@ -298,6 +292,22 @@ local Toggle = mainTab:CreateToggle({
         else
             getgenv().swordLoop = false
         end
+    end
+})
+
+local potionsTab = Window:CreateTab("Potions", "crosshair")
+ 
+  local Section = potionsTab:CreateSection("Potions Settings")
+  
+
+  local Button = potionsTab:CreateButton({
+    Name = "Use a random potion",
+    Callback = function()
+        local args = {
+            [1] = true
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("EventRemotes"):WaitForChild("Potion"):FireServer(unpack(args))
     end
 })
  
