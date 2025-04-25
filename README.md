@@ -5,7 +5,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
      Name = "Horrifc housing",
      Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
      LoadingTitle = "Loading...",
-     LoadingSubtitle = "by isssacque1234",
+     LoadingSubtitle = "by Not's server",
      Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
   
      DisableRayfieldPrompts = false,
@@ -71,7 +71,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
                                     rocket.fire:FireServer(unpack(args))
                                 end
                             end
-                            task.wait(0.1)
+                            task.wait(0.01)
                         end
                     end
                 end
@@ -158,7 +158,7 @@ local Button = mainTab:CreateButton({
 
 
 local Toggle = mainTab:CreateToggle({
-    Name = "Auto Kill all, version Gears; use Rocket item",
+    Name = "Auto Kill all but fixed; use Rocket item",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
@@ -195,7 +195,7 @@ local Toggle = mainTab:CreateToggle({
                                     local args = { [1] = direction }
                                     fire:FireServer(unpack(args))
                                 end
-                                task.wait(0.1)
+                                task.wait(0.01)
                             end
                         end
                     end
@@ -230,7 +230,7 @@ local Toggle = mainTab:CreateToggle({
                                     targetPlayer.Character.UpperTorso
                                 }
                                 myChar.Coconut.throwEvent:FireServer(unpack(args))
-                                task.wait(0.1)
+                                task.wait(0.01)
                             end
                         end
                     end
@@ -261,10 +261,10 @@ local Toggle = mainTab:CreateToggle({
                                 targetPos
                             }
                             game:GetService("Players").LocalPlayer.Character.Snowball.remote:FireServer(unpack(args))
-                            task.wait(0.1)
+                            task.wait(0.01)
                         end
                     end
-                    task.wait(0.1)
+                    task.wait(0.01)
                 end
             end)
         else
