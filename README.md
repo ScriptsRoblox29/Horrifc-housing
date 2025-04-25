@@ -217,6 +217,50 @@ local Toggle = mainTab:CreateToggle({
 })
 
 
+local Input = visualsTab:CreateInput({
+    Name = "Coconut Count; important for kill all 4",
+    CurrentValue = "",
+    PlaceholderText = "Enter number of coconuts",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Text)
+        getgenv().coconutCount = tonumber(Text) or 0
+    end,
+})
+
+local Toggle = mainTab:CreateToggle({
+    Name = "Kill all 4; use coconut",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().coconutLaunch = Value
+
+        if Value then
+            task.spawn(function()
+                local player = game.Players.LocalPlayer
+                local coconutCount = getgenv().coconutCount
+                while getgenv().coconutLaunch do
+                    for _, targetPlayer in pairs(game.Players:GetPlayers()) do
+                        if targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            local args = {
+                                [1] = targetPlayer.Character.HumanoidRootPart.Position,
+                                [2] = targetPlayer.Character.UpperTorso,
+                                [3] = coconutCount
+                            }
+
+                            game:GetService("Players").LocalPlayer.Character.Coconut.throwEvent:FireServer(unpack(args))
+                        end
+                    end
+                    task.wait(0)
+                end
+            end)
+        else
+            getgenv().coconutLaunch = false
+        end
+    end
+})
+
+
 local Toggle = mainTab:CreateToggle({
     Name = "Anti-void",
     CurrentValue = false,
