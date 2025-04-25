@@ -186,6 +186,38 @@ local Toggle = mainTab:CreateToggle({
 
 
 local Toggle = mainTab:CreateToggle({
+    Name = "Kill all 3; use paintball item",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().paintballAll = Value
+
+        if Value then
+            task.spawn(function()
+                while getgenv().paintballAll do
+                    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                        if not getgenv().paintballAll then break end
+                        if player ~= game:GetService("Players").LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                            local targetPosition = player.Character.HumanoidRootPart.Position
+                            local args = {
+                                [1] = targetPosition
+                            }
+
+                            game:GetService("Players").LocalPlayer.Character.PaintballGun.remote:FireServer(unpack(args))
+                            task.wait(0)
+                        end
+                    end
+                    task.wait(0)
+                end
+            end)
+        else
+            getgenv().paintballAll = false
+        end
+    end
+})
+
+
+local Toggle = mainTab:CreateToggle({
     Name = "Anti-void",
     CurrentValue = false,
     Flag = "Toggle1",
