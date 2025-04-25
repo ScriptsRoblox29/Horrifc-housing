@@ -218,7 +218,7 @@ local Toggle = mainTab:CreateToggle({
 
 
 local Input = mainTab:CreateInput({
-    Name = "Coconut Count; important for kill all 4",
+    Name = "Coconut Count; important for kill all",
     CurrentValue = "",
     PlaceholderText = "Enter number of coconuts",
     RemoveTextAfterFocusLost = false,
