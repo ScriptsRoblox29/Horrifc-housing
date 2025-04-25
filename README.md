@@ -207,7 +207,7 @@ local Toggle = mainTab:CreateToggle({
     end
 })
 
-local Toggle = visualsTab:CreateToggle({
+local Toggle = mainTab:CreateToggle({
     Name = "attack others with coco; equip coconut",
     CurrentValue = false,
     Flag = "Toggle1",
@@ -245,8 +245,16 @@ local Toggle = visualsTab:CreateToggle({
 
  
   Rayfield:Notify({
-     Title = "Script by isssacque1234",
+     Title = "Script by Not's server",
      Content = "loaded",
      Duration = 6.5,
+     Image = 4483362458,
+  })
+
+
+Rayfield:Notify({
+     Title = "I recommend leaving videos, comments etc as private or only people with a link can enter, This makes the devs not censor and the script last longer.",
+     Content = "!!",
+     Duration = 15,
      Image = 4483362458,
   })
