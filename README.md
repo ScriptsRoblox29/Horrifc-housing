@@ -243,36 +243,6 @@ local Toggle = mainTab:CreateToggle({
 })
 
 
-local Toggle = mainTab:CreateToggle({
-    Name = "touch all tiles to fall",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().tileTeleport = Value
-
-        if Value then
-            task.spawn(function()
-                local player = game.Players.LocalPlayer
-                while getgenv().tileTeleport do
-                    local arena = workspace:FindFirstChild("Spleef Arena")
-                    if arena then
-                        for _, tile in ipairs(arena:GetChildren()) do
-                            if tile:IsA("BasePart") then
-                                if not getgenv().tileTeleport then return end
-                                player.Character:PivotTo(tile.CFrame)
-                                task.wait(0.1)
-                            end
-                        end
-                    end
-                end
-            end)
-        else
-            getgenv().tileTeleport = false
-        end
-    end
-})
-
-
 local itemsTab = Window:CreateTab("Items", "crosshair")
  
   local Section = itemsTab:CreateSection("Items Settings")
