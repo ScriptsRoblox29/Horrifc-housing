@@ -71,7 +71,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
                                     rocket.fire:FireServer(unpack(args))
                                 end
                             end
-                            task.wait(0.01)
+                            task.wait(0)
                         end
                     end
                 end
@@ -115,7 +115,7 @@ local Toggle = mainTab:CreateToggle({
                             end
                         end
                     end
-                    task.wait(0.1)
+                    task.wait(0)
                 end
             end)
         else
@@ -195,7 +195,7 @@ local Toggle = mainTab:CreateToggle({
                                     local args = { [1] = direction }
                                     fire:FireServer(unpack(args))
                                 end
-                                task.wait(0.01)
+                                task.wait(0)
                             end
                         end
                     end
@@ -206,43 +206,6 @@ local Toggle = mainTab:CreateToggle({
         end
     end
 })
-
-local Toggle = mainTab:CreateToggle({
-    Name = "attack others with coco; equip coconut",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().autoCoconut = Value
-
-        if Value then
-            task.spawn(function()
-                local Players = game:GetService("Players")
-                local LocalPlayer = Players.LocalPlayer
-
-                while getgenv().autoCoconut do
-                    local myChar = LocalPlayer.Character
-                    if myChar and myChar:FindFirstChild("Coconut") and myChar:FindFirstChild("HumanoidRootPart") then
-                        local spawnPos = myChar.HumanoidRootPart.Position
-                        for _, targetPlayer in pairs(Players:GetPlayers()) do
-                            if targetPlayer ~= LocalPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("UpperTorso") then
-                                local args = {
-                                    spawnPos,
-                                    targetPlayer.Character.UpperTorso
-                                }
-                                myChar.Coconut.throwEvent:FireServer(unpack(args))
-                                task.wait(0.01)
-                            end
-                        end
-                    end
-                    task.wait(0.1)
-                end
-            end)
-        else
-            getgenv().autoCoconut = false
-        end
-    end
-})
-
 
 local Toggle = mainTab:CreateToggle({
     Name = "Kill all 2; equip SnowBall",
@@ -264,7 +227,7 @@ local Toggle = mainTab:CreateToggle({
                             task.wait(0.01)
                         end
                     end
-                    task.wait(0.01)
+                    task.wait(0)
                 end
             end)
         else
@@ -296,25 +259,7 @@ local Toggle = mainTab:CreateToggle({
     end
 })
 
-local Toggle = mainTab:CreateToggle({
-    Name = "NoCooldown katana",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().katanaLoop = Value
 
-        if Value then
-            task.spawn(function()
-                while getgenv().katanaLoop do
-                    game:GetService("Players").LocalPlayer.Character.Katana.Event:FireServer()
-                    task.wait(0.01)
-                end
-            end)
-        else
-            getgenv().katanaLoop = false
-        end
-    end
-})
 
 local Toggle = mainTab:CreateToggle({
     Name = "NoCooldown Blade (dueling sword)",
@@ -327,11 +272,31 @@ local Toggle = mainTab:CreateToggle({
             task.spawn(function()
                 while getgenv().bladeLoop do
                     game:GetService("Players").LocalPlayer.Character.Blade.Event:FireServer()
-                    task.wait(0.01)
+                    task.wait(0)
                 end
             end)
         else
             getgenv().bladeLoop = false
+        end
+    end
+})
+
+local Toggle = mainTab:CreateToggle({
+    Name = "NoCooldown Sword",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().swordLoop = Value
+
+        if Value then
+            task.spawn(function()
+                while getgenv().swordLoop do
+                    game:GetService("Players").LocalPlayer.Character.Sword.Event:FireServer()
+                    task.wait(0)
+                end
+            end)
+        else
+            getgenv().swordLoop = false
         end
     end
 })
