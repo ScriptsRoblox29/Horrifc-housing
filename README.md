@@ -310,6 +310,42 @@ local potionsTab = Window:CreateTab("Potions", "crosshair")
         game:GetService("ReplicatedStorage"):WaitForChild("EventRemotes"):WaitForChild("Potion"):FireServer(unpack(args))
     end
 })
+
+local guisTab = Window:CreateTab("Guis", "crosshair")
+ 
+  local Section = guisTab:CreateSection("Guis Settings")
+
+  
+  local Toggle = guisTab:CreateToggle({
+    Name = "Hide effects status",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().statusToggle = Value
+
+        local player = game.Players.LocalPlayer
+        local gui = player:FindFirstChild("PlayerGui")
+        if not gui then return end
+
+        if Value then
+            getgenv().statusToggleConnection = game:GetService("RunService").RenderStepped:Connect(function()
+                local status = gui:FindFirstChild("statusAffects")
+                if status then
+                    status.Enabled = false
+                end
+            end)
+        else
+            if getgenv().statusToggleConnection then
+                getgenv().statusToggleConnection:Disconnect()
+                getgenv().statusToggleConnection = nil
+            end
+            local status = gui:FindFirstChild("statusAffects")
+            if status then
+                status.Enabled = true
+            end
+        end
+    end
+})
  
   Rayfield:Notify({
      Title = "Script by Not's server",
