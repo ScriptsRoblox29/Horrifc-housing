@@ -249,6 +249,32 @@ local Toggle = mainTab:CreateToggle({
 })
 
 
+local Toggle = mainTab:CreateToggle({
+    Name = "Anti-void",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().giantPartToggle = Value
+
+        if Value then
+            local part = Instance.new("Part")
+            part.Size = Vector3.new(2000, 1, 2000)
+            part.Position = Vector3.new(1.2150108814239502, -0.8852427005767822, 65.64254760742188)
+            part.Anchored = true
+            part.CanCollide = true
+            part.Transparency = 0.5
+            part.Name = "GiantPart"
+            part.Parent = workspace
+        else
+            local existing = workspace:FindFirstChild("GiantPart")
+            if existing then
+                existing:Destroy()
+            end
+        end
+    end
+})
+
+
 local itemsTab = Window:CreateTab("Items", "crosshair")
  
   local Section = itemsTab:CreateSection("Items Settings")
