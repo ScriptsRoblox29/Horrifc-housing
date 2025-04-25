@@ -272,6 +272,29 @@ local Toggle = mainTab:CreateToggle({
         end
     end
 })
+
+local Toggle = mainTab:CreateToggle({
+    Name = "Auto correct math",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().autoMathTest = Value
+
+        if Value then
+            task.spawn(function()
+                while getgenv().autoMathTest do
+                    local args = {
+                        "Correct"
+                    }
+                    game:GetService("ReplicatedStorage"):WaitForChild("EventRemotes"):WaitForChild("MathTest"):FireServer(unpack(args))
+                    task.wait(1)
+                end
+            end)
+        else
+            getgenv().autoMathTest = false
+        end
+    end
+})
  
   Rayfield:Notify({
      Title = "Script by Not's server",
