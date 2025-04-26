@@ -124,6 +124,33 @@ local Button = itemsTab:CreateButton({
     end
 })
 
+local Button = itemsTab:CreateButton({
+    Name = "Get the Map",
+    Callback = function()
+        local function findMapModel(parent)
+            for _, descendant in ipairs(parent:GetDescendants()) do
+                if descendant.Name == "MapModel" and descendant:IsA("BasePart") then
+                    return descendant
+                end
+            end
+        end
+
+        local mapModel = findMapModel(workspace)
+        if mapModel then
+            local character = game.Players.LocalPlayer.Character
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                character:PivotTo(mapModel.CFrame)
+
+                local prompt = mapModel:FindFirstChildWhichIsA("ProximityPrompt", true)
+                if prompt then
+                    prompt.HoldDuration = 0
+                    fireproximityprompt(prompt)
+                end
+            end
+        end
+    end
+})
+
 
 local potionsTab = Window:CreateTab("Potions", "crosshair")
  
