@@ -80,7 +80,7 @@ local Toggle = mainTab:CreateToggle({
             task.spawn(function()
                 local player = game.Players.LocalPlayer
 
-                while getgenv().alvoPosicao do
+                while getgenv().target do
                     for _, target in ipairs(game.Players:GetPlayers()) do
                         if target ~= player and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
                             local pos = target.Character.HumanoidRootPart.Position
