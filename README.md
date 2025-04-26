@@ -126,61 +126,46 @@ local Button = itemsTab:CreateButton({
 
 
 local Button = itemsTab:CreateButton({
-    Name = "Auto Get map",
+    Name = "Auto get map",
     Callback = function()
-        task.spawn(function()
-            local player = game.Players.LocalPlayer
-            local workspaceDescendants = workspace:GetDescendants()
-            local mapModel
-            for _, obj in ipairs(workspaceDescendants) do
-                if obj:IsA("Model") and obj.Name == "MapModel" then
-                    mapModel = obj
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+        local function findFirstPrompt(descendants)
+            for _, descendant in ipairs(descendants) do
+                if descendant:IsA("ProximityPrompt") then
+                    return descendant
+                end
+            end
+            return nil
+        end
+
+        local function teleportAndClickPrompt(modelName)
+            local model = nil
+            for _, descendant in ipairs(workspace:GetDescendants()) do
+                if descendant.Name == modelName then
+                    model = descendant
                     break
                 end
             end
-            if mapModel then
-                if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                    player.Character:PivotTo(mapModel:GetPivot())
-                end
-                local mapPrompt
-                for _, descendant in ipairs(mapModel:GetDescendants()) do
-                    if descendant:IsA("ProximityPrompt") then
-                        mapPrompt = descendant
-                        break
-                    end
-                end
-                if mapPrompt then
-                    mapPrompt.HoldDuration = 0
-                    task.wait(0.2)
-                    fireproximityprompt(mapPrompt)
+
+            if model then
+                local prompt = findFirstPrompt(model:GetDescendants())
+                if prompt then
+                    humanoidRootPart.CFrame = model.CFrame
+                    task.wait(0.5)
+                    prompt.HoldDuration = 0
+                    fireproximityprompt(prompt)
                 end
             end
-            task.wait(0.5)
-            local point
-            for _, obj in ipairs(workspaceDescendants) do
-                if obj:IsA("Model") and obj.Name == "Point" then
-                    point = obj
-                    break
-                end
-            end
-            if point then
-                if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                    player.Character:PivotTo(point:GetPivot())
-                end
-                local pointPrompt
-                for _, descendant in ipairs(point:GetDescendants()) do
-                    if descendant:IsA("ProximityPrompt") then
-                        pointPrompt = descendant
-                        break
-                    end
-                end
-                if pointPrompt then
-                    pointPrompt.HoldDuration = 0
-                    task.wait(0.2)
-                    fireproximityprompt(pointPrompt)
-                end
-            end
-        end)
+        end
+
+        teleportAndClickPrompt("MapModel")
+
+        task.wait(1)
+
+        teleportAndClickPrompt("Point")
     end
 })
 
