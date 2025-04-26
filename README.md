@@ -421,6 +421,34 @@ local Toggle = guisTab:CreateToggle({
     end
 })
 
+local antiTab = Window:CreateTab("Anti", "crosshair")
+ 
+  local Section = antiTab:CreateSection("Anti Settings")
+
+
+  local Button = antiTab:CreateButton({
+    Name = "Anti-Lava",
+    Callback = function()
+        for _, v in ipairs(workspace:GetDescendants()) do
+            if v:IsA("Part") and v.Name == "LavaPlate" then
+                v:Destroy()
+            end
+        end
+    end,
+})
+
+
+local Button = antiTab:CreateButton({
+    Name = "Anti-LavaSpinner",
+    Callback = function()
+        for _, v in ipairs(workspace:GetDescendants()) do
+            if v:IsA("Model") and v.Name == "Spinner" then
+                v:Destroy()
+            end
+        end
+    end,
+})
+
  
   Rayfield:Notify({
      Title = "Script by Not's server",
