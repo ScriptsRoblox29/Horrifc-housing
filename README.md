@@ -156,7 +156,7 @@ local Button = itemsTab:CreateButton({
                 local prompt = findFirstPrompt(model:GetDescendants())
                 if prompt then
                     humanoidRootPart.CFrame = model.CFrame
-                    task.wait(0.05)
+                    task.wait(0.25)
                     prompt.HoldDuration = 0
                     fireproximityprompt(prompt)
                 end
@@ -165,11 +165,11 @@ local Button = itemsTab:CreateButton({
 
         teleportAndClickPrompt("MapModel")
 
-        task.wait(0.05)
+        task.wait(0.25)
 
         teleportAndClickPrompt("Point")
 
-        task.wait(0.05)
+        task.wait(0.25)
 
         humanoidRootPart.CFrame = savedCFrame
     end
