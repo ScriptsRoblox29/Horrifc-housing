@@ -462,7 +462,7 @@ local Toggle = trollTab:CreateToggle({
 
 
 local Input = trollTab:CreateInput({
-    Name = "Coconut Count; important",
+    Name = "How many coconuts do you have; important for kill all 4",
     CurrentValue = "",
     PlaceholderText = "Enter number of coconuts",
     RemoveTextAfterFocusLost = false,
