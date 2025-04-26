@@ -35,217 +35,8 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
   local mainTab = Window:CreateTab("Main", "crosshair")
  
   local Section = mainTab:CreateSection("Main Settings")
+
  
- 
- local Toggle = mainTab:CreateToggle({
-    Name = "Kill all; use rocket item",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().rocketSpam = Value
-
-        if Value then
-            task.spawn(function()
-                local player = game.Players.LocalPlayer
-                while getgenv().rocketSpam do
-                    for _, target in pairs(game.Players:GetPlayers()) do
-                        if target ~= player and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
-                            local direction = (target.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Unit
-
-                            local args = {
-                                [1] = direction
-                            }
-
-                            player.Character.RocketLauncher.fire:FireServer(unpack(args))
-                            task.wait(0)
-                        end
-                    end
-                end
-            end)
-        else
-            getgenv().rocketSpam = false
-        end
-    end
-})
-
-
-local Toggle = mainTab:CreateToggle({
-    Name = "Freeze all; use freeze ray",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().target = Value
-
-        if Value then
-            task.spawn(function()
-                local player = game.Players.LocalPlayer
-
-                while getgenv().target do
-                    for _, target in ipairs(game.Players:GetPlayers()) do
-                        if target ~= player and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
-                            local pos = target.Character.HumanoidRootPart.Position
-                            player:WaitForChild("Event"):FireServer(pos)
-                            task.wait(0)
-                        end
-                    end
-                end
-            end)
-        else
-            getgenv().target = false
-        end
-    end
-})
-
-
-local Button = mainTab:CreateButton({
-    Name = "bypass Cooldown of Flute; equip flute item",
-    Callback = function()
-        function getNil(name, class)
-            for _, v in next, getnilinstances() do
-                if v.ClassName == class and v.Name == name then
-                    return v
-                end
-            end
-        end
-
-        local args = {
-            [1] = 1,
-            [2] = getNil("Handle", "Part")
-        }
-
-        getNil("Flute", "Tool"):WaitForChild("Remote"):FireServer(unpack(args))
-    end
-})
-
-local Toggle = mainTab:CreateToggle({
-    Name = "Kill all 2; equip SnowBall",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().autoKillEnabled = Value
-
-        if Value then
-            task.spawn(function()
-                while getgenv().autoKillEnabled do
-                    for _, targetPlayer in pairs(game.Players:GetPlayers()) do
-                        if targetPlayer ~= game.Players.LocalPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                            local targetPos = targetPlayer.Character.HumanoidRootPart.Position
-                            local args = {
-                                targetPos
-                            }
-                            game:GetService("Players").LocalPlayer.Character.Snowball.remote:FireServer(unpack(args))
-                            task.wait(0.01)
-                        end
-                    end
-                    task.wait(0)
-                end
-            end)
-        else
-            getgenv().autoKillEnabled = false
-        end
-    end
-})
-
-local Toggle = mainTab:CreateToggle({
-    Name = "Auto correct math",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().autoMathTest = Value
-
-        if Value then
-            task.spawn(function()
-                while getgenv().autoMathTest do
-                    local args = {
-                        "Correct"
-                    }
-                    game:GetService("ReplicatedStorage"):WaitForChild("EventRemotes"):WaitForChild("MathTest"):FireServer(unpack(args))
-                    task.wait(1)
-                end
-            end)
-        else
-            getgenv().autoMathTest = false
-        end
-    end
-})
-
-
-local Toggle = mainTab:CreateToggle({
-    Name = "Kill all 3; use paintball item",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().paintballAll = Value
-
-        if Value then
-            task.spawn(function()
-                while getgenv().paintballAll do
-                    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
-                        if not getgenv().paintballAll then break end
-                        if player ~= game:GetService("Players").LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                            local targetPosition = player.Character.HumanoidRootPart.Position
-                            local args = {
-                                [1] = targetPosition
-                            }
-
-                            game:GetService("Players").LocalPlayer.Character.PaintballGun.remote:FireServer(unpack(args))
-                            task.wait(0)
-                        end
-                    end
-                    task.wait(0)
-                end
-            end)
-        else
-            getgenv().paintballAll = false
-        end
-    end
-})
-
-
-local Input = mainTab:CreateInput({
-    Name = "Coconut Count; important",
-    CurrentValue = "",
-    PlaceholderText = "Enter number of coconuts",
-    RemoveTextAfterFocusLost = false,
-    Flag = "Input1",
-    Callback = function(Text)
-        getgenv().coconutCount = tonumber(Text) or 0
-    end,
-})
-
-local Toggle = mainTab:CreateToggle({
-    Name = "Kill all 4; use coconut",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().coconutLaunch = Value
-
-        if Value then
-            task.spawn(function()
-                local player = game.Players.LocalPlayer
-                local coconutCount = getgenv().coconutCount
-                while getgenv().coconutLaunch do
-                    for _, targetPlayer in pairs(game.Players:GetPlayers()) do
-                        if targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                            local args = {
-                                [1] = targetPlayer.Character.HumanoidRootPart.Position,
-                                [2] = targetPlayer.Character.UpperTorso,
-                                [3] = coconutCount
-                            }
-
-                            game:GetService("Players").LocalPlayer.Character.Coconut.throwEvent:FireServer(unpack(args))
-                        end
-                    end
-                    task.wait(0)
-                end
-            end)
-        else
-            getgenv().coconutLaunch = false
-        end
-    end
-})
-
-
 local Toggle = mainTab:CreateToggle({
     Name = "Anti-void",
     CurrentValue = false,
@@ -447,6 +238,180 @@ local Button = antiTab:CreateButton({
             end
         end
     end,
+})
+
+
+local trollTab = Window:CreateTab("Troll", "crosshair")
+ 
+  local Section = trollTab:CreateSection("Troll Settings")
+
+
+  local Toggle = trollTab:CreateToggle({
+    Name = "Kill all; use rocket item",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().rocketSpam = Value
+
+        if Value then
+            task.spawn(function()
+                local player = game.Players.LocalPlayer
+                while getgenv().rocketSpam do
+                    for _, target in pairs(game.Players:GetPlayers()) do
+                        if target ~= player and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+                            local direction = (target.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Unit
+
+                            local args = {
+                                [1] = direction
+                            }
+
+                            player.Character.RocketLauncher.fire:FireServer(unpack(args))
+                            task.wait(0)
+                        end
+                    end
+                end
+            end)
+        else
+            getgenv().rocketSpam = false
+        end
+    end
+})
+
+
+local Toggle = trollTab:CreateToggle({
+    Name = "Freeze all; use freeze ray",
+    CurrentValue = false,
+    Flag = "FreezeRayToggle",
+    Callback = function(Value)
+        getgenv().freezeRaySpam = Value
+        if Value then
+            task.spawn(function()
+                while getgenv().freezeRaySpam do
+                    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                        if player ~= game.Players.LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                            local pos = player.Character.HumanoidRootPart.Position
+                            local args = {
+                                Vector3.new(pos.X, pos.Y, pos.Z)
+                            }
+                            local freezeRay = game.Players.LocalPlayer.Character:FindFirstChild("Freeze Ray")
+                            if freezeRay and freezeRay:FindFirstChild("fire") then
+                                freezeRay.fire:FireServer(unpack(args))
+                            end
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            getgenv().freezeRaySpam = false
+        end
+    end
+})
+
+
+local Toggle = trollTab:CreateToggle({
+    Name = "Kill all 2; equip SnowBall",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().autoKillEnabled = Value
+
+        if Value then
+            task.spawn(function()
+                while getgenv().autoKillEnabled do
+                    for _, targetPlayer in pairs(game.Players:GetPlayers()) do
+                        if targetPlayer ~= game.Players.LocalPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            local targetPos = targetPlayer.Character.HumanoidRootPart.Position
+                            local args = {
+                                targetPos
+                            }
+                            game:GetService("Players").LocalPlayer.Character.Snowball.remote:FireServer(unpack(args))
+                            task.wait(0.01)
+                        end
+                    end
+                    task.wait(0)
+                end
+            end)
+        else
+            getgenv().autoKillEnabled = false
+        end
+    end
+})
+
+
+local Toggle = trollTab:CreateToggle({
+    Name = "Kill all 3; use paintball item",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().paintballAll = Value
+
+        if Value then
+            task.spawn(function()
+                while getgenv().paintballAll do
+                    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                        if not getgenv().paintballAll then break end
+                        if player ~= game:GetService("Players").LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                            local targetPosition = player.Character.HumanoidRootPart.Position
+                            local args = {
+                                [1] = targetPosition
+                            }
+
+                            game:GetService("Players").LocalPlayer.Character.PaintballGun.remote:FireServer(unpack(args))
+                            task.wait(0)
+                        end
+                    end
+                    task.wait(0)
+                end
+            end)
+        else
+            getgenv().paintballAll = false
+        end
+    end
+})
+
+
+local Input = trollTab:CreateInput({
+    Name = "Coconut Count; important",
+    CurrentValue = "",
+    PlaceholderText = "Enter number of coconuts",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Text)
+        getgenv().coconutCount = tonumber(Text) or 0
+    end,
+})
+
+local Toggle = trollTab:CreateToggle({
+    Name = "Kill all 4; use coconut",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().coconutLaunch = Value
+
+        if Value then
+            task.spawn(function()
+                local player = game.Players.LocalPlayer
+                local coconutCount = getgenv().coconutCount
+                while getgenv().coconutLaunch do
+                    for _, targetPlayer in pairs(game.Players:GetPlayers()) do
+                        if targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            local args = {
+                                [1] = targetPlayer.Character.HumanoidRootPart.Position,
+                                [2] = targetPlayer.Character.UpperTorso,
+                                [3] = coconutCount
+                            }
+
+                            game:GetService("Players").LocalPlayer.Character.Coconut.throwEvent:FireServer(unpack(args))
+                        end
+                    end
+                    task.wait(0)
+                end
+            end)
+        else
+            getgenv().coconutLaunch = false
+        end
+    end
 })
 
  
