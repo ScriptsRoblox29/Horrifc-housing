@@ -318,6 +318,38 @@ local Toggle = itemsTab:CreateToggle({
     end
 })
 
+local Toggle = itemsTab:CreateToggle({
+    Name = "NoCooldown Prompts",
+    CurrentValue = false,
+    Callback = function(Value)
+        getgenv().noHold = Value
+
+        local promptData = {}
+
+        if Value then
+            task.spawn(function()
+                while getgenv().noHold do
+                    for _, v in ipairs(workspace:GetDescendants()) do
+                        if v:IsA("ProximityPrompt") then
+                            if not promptData[v] then
+                                promptData[v] = v.HoldDuration
+                            end
+                            v.HoldDuration = 0
+                        end
+                    end
+                    task.wait(0.2)
+                end
+            end)
+        else
+            for prompt, originalTime in pairs(promptData) do
+                if prompt and prompt.Parent then
+                    prompt.HoldDuration = originalTime
+                end
+            end
+        end
+    end
+})
+
 local potionsTab = Window:CreateTab("Potions", "crosshair")
  
   local Section = potionsTab:CreateSection("Potions Settings")
