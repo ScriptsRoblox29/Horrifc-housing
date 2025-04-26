@@ -170,6 +170,45 @@ local Button = itemsTab:CreateButton({
 })
 
 
+local Button = itemsTab:CreateButton({
+    Name = "Auto touch Illumina",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+        local savedCFrame = humanoidRootPart.CFrame
+
+        local illumina
+        for _, descendant in ipairs(workspace:GetDescendants()) do
+            if descendant.Name == "Illumina" and (descendant:IsA("BasePart") or descendant:IsA("Model")) then
+                illumina = descendant
+                break
+            end
+        end
+
+        if illumina then
+            local targetCFrame
+            if illumina:IsA("Model") then
+                if illumina.PrimaryPart then
+                    targetCFrame = illumina.PrimaryPart.CFrame
+                else
+                    targetCFrame = illumina:GetPivot()
+                end
+            elseif illumina:IsA("BasePart") then
+                targetCFrame = illumina.CFrame
+            end
+
+            if targetCFrame then
+                humanoidRootPart.CFrame = targetCFrame
+                task.wait(0.1)
+                humanoidRootPart.CFrame = savedCFrame
+            end
+        end
+    end
+})
+
+
 local potionsTab = Window:CreateTab("Potions", "crosshair")
  
   local Section = potionsTab:CreateSection("Potions Settings")
