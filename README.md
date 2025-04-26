@@ -201,7 +201,7 @@ local Button = itemsTab:CreateButton({
 
             if targetCFrame then
                 humanoidRootPart.CFrame = targetCFrame
-                task.wait(0.1)
+                task.wait(0.25)
                 humanoidRootPart.CFrame = savedCFrame
             end
         end
