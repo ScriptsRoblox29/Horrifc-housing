@@ -132,6 +132,8 @@ local Button = itemsTab:CreateButton({
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
+        local savedCFrame = humanoidRootPart.CFrame
+
         local function findFirstPrompt(descendants)
             for _, descendant in ipairs(descendants) do
                 if descendant:IsA("ProximityPrompt") then
@@ -166,6 +168,10 @@ local Button = itemsTab:CreateButton({
         task.wait(1)
 
         teleportAndClickPrompt("Point")
+
+        task.wait(0.1)
+
+        humanoidRootPart.CFrame = savedCFrame
     end
 })
 
