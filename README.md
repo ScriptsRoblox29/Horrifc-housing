@@ -397,7 +397,7 @@ local Button = antiTab:CreateButton({
                 v.Material = "Plastic"
                 v.Reflectance = 0
                 v.TextureID = 10385902758728957
-                v.MeshID = 0
+                v.MeshId = 0
             end
         end
 
