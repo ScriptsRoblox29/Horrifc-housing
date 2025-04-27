@@ -802,24 +802,17 @@ local playerTab = Window:CreateTab("Player", 7992557358)
   local Section = playerTab:CreateSection("Player Settings")
 
 
-  local Toggle = playerTab:CreateToggle({
+local Button = playerTab:CreateButton({
     Name = "Infinite Jump",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().DoubleJumpEnabled = Value
+    Callback = function()
         local InfiniteJumpEnabled = true
 game:GetService("UserInputService").JumpRequest:connect(function()
 	if InfiniteJumpEnabled then
 		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-        end
-    end)
-    else
-    getgenv().DoubleJumpEnabled = false
-    InfiniteJumpEnabled = false
-    end
-  end,
+	end
+end)
 })
+  
 
 
 local Input = playerTab:CreateInput({
