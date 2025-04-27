@@ -32,64 +32,20 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
  
  
  
-  local mainTab = Window:CreateTab("Main", 7539983773)
+  local homeTab = Window:CreateTab("Home", 7539983773)
  
-  local Section = mainTab:CreateSection("Main Settings")
+  local Section = homeTab:CreateSection("Starting place")
 
- 
-local Toggle = mainTab:CreateToggle({
-    Name = "Anti-void",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        getgenv().giantPartToggle = Value
+  local Label = homeTab:CreateLabel("Not Patched", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
-        if Value then
-            local part = Instance.new("Part")
-            part.Size = Vector3.new(2000, 1, 2000)
-            part.Position = Vector3.new(1.2150108814239502, -0.8852427005767822, 65.64254760742188)
-            part.Anchored = true
-            part.CanCollide = true
-            part.Transparency = 0.5
-            part.Name = "GiantPart"
-            part.Parent = workspace
-        else
-            local existing = workspace:FindFirstChild("GiantPart")
-            if existing then
-                existing:Destroy()
-            end
-        end
-    end
-})
+  local Label = homeTab:CreateLabel("New Key soon: April 28, 2025", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
+  local Label = homeTab:CreateLabel("Game: Horrific Housing", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
-local Button = mainTab:CreateButton({
-    Name = "Get all items and Tokens; 1 Token needed and Lag warning",
-    Callback = function()
-        task.spawn(function()
-            while true do
-                local args1 = {[1] = 0.0000000001, [2] = "HouseChest"}
-                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args1))
+  local Label = homeTab:CreateLabel("Status: Working", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
-                local args2 = {[1] = 0.00000001, [2] = "Furniture"}
-                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args2))
-
-                local args3 = {[1] = 0.000000001, [2] = "EggPets"}
-                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args3))
-
-                local args4 = {[1] = 0.0000001, [2] = "Ornament"}
-                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args4))
-
-                local args5 = {[1] = 0.0000000001, [2] = "Death"}
-                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args5))
-
-                task.wait(0)
-            end
-        end)
-    end
-})
-
-
+  local Label = homeTab:CreateLabel("Script by Not's hub", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
+  
 local itemsTab = Window:CreateTab("Items", 129306263749313)
  
   local Section = itemsTab:CreateSection("Items Settings")
@@ -242,6 +198,33 @@ local Button = itemsTab:CreateButton({
 })
 
 
+local Button = itemsTab:CreateButton({
+    Name = "Get all items and Tokens; 1 Token needed and Lag warning",
+    Callback = function()
+        task.spawn(function()
+            while true do
+                local args1 = {[1] = 0.0000000001, [2] = "HouseChest"}
+                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args1))
+
+                local args2 = {[1] = 0.00000001, [2] = "Furniture"}
+                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args2))
+
+                local args3 = {[1] = 0.000000001, [2] = "EggPets"}
+                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args3))
+
+                local args4 = {[1] = 0.0000001, [2] = "Ornament"}
+                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args4))
+
+                local args5 = {[1] = 0.0000000001, [2] = "Death"}
+                game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args5))
+
+                task.wait(0)
+            end
+        end)
+    end
+})
+
+
 local potionsTab = Window:CreateTab("Effects", 13518130183)
  
   local Section = potionsTab:CreateSection("Effects Settings")
@@ -257,6 +240,7 @@ local potionsTab = Window:CreateTab("Effects", 13518130183)
         game:GetService("ReplicatedStorage"):WaitForChild("EventRemotes"):WaitForChild("Potion"):FireServer(unpack(args))
     end
 })
+
 
 local guisTab = Window:CreateTab("Guis", 103950363563606)
  
@@ -355,6 +339,32 @@ local Button = antiTab:CreateButton({
             end
         end
     end,
+})
+
+
+local Toggle = antiTab:CreateToggle({
+    Name = "Anti-void",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().giantPartToggle = Value
+
+        if Value then
+            local part = Instance.new("Part")
+            part.Size = Vector3.new(2000, 1, 2000)
+            part.Position = Vector3.new(1.2150108814239502, -0.8852427005767822, 65.64254760742188)
+            part.Anchored = true
+            part.CanCollide = true
+            part.Transparency = 0.5
+            part.Name = "GiantPart"
+            part.Parent = workspace
+        else
+            local existing = workspace:FindFirstChild("GiantPart")
+            if existing then
+                existing:Destroy()
+            end
+        end
+    end
 })
 
 
