@@ -849,6 +849,36 @@ local playerTab = Window:CreateTab("Player", 7992557358)
     end
 })
 
+
+local Input = playerTab:CreateInput({
+    Name = "Speed",
+    CurrentValue = "",
+    PlaceholderText = "Enter the speed",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Text)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+        humanoid.WalkSpeed = tonumber(Text) or 16
+    end,
+})
+
+
+local Input = playerTab:CreateInput({
+    Name = "JumpPower",
+    CurrentValue = "",
+    PlaceholderText = "Enter the JumpPower",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Text)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+        humanoid.JumpPower = tonumber(Text) or 50
+    end,
+})
+
  
   Rayfield:Notify({
      Title = "Script by Not's Hub",
