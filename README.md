@@ -83,7 +83,7 @@ local Button = mainTab:CreateButton({
                 local args5 = {[1] = 0.0000000001, [2] = "Death"}
                 game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args5))
 
-                task.wait(0.01)
+                task.wait(0)
             end
         end)
     end
