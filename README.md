@@ -556,6 +556,29 @@ local Input = tpTab:CreateInput({
     end
 })
 
+
+local Button = tpTab:CreateButton({
+    Name = "Teleport to end of obby",
+    Callback = function()
+        local function findVictory2(parent)
+            for _, obj in ipairs(parent:GetDescendants()) do
+                if obj:IsA("BasePart") and obj.Name == "Victory2" then
+                    return obj
+                end
+            end
+        end
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local hrp = character:WaitForChild("HumanoidRootPart")
+        local victory = findVictory2(game.Workspace)
+
+        if victory then
+            hrp.CFrame = victory.CFrame
+        end
+    end
+})
+
  
   Rayfield:Notify({
      Title = "Script by Not's Hub",
