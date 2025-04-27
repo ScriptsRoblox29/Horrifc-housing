@@ -36,15 +36,15 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
  
   local Section = homeTab:CreateSection("Starting place")
 
-  local Label = homeTab:CreateLabel("Not Patched", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
+  local Label = homeTab:CreateLabel("Not Patched", 6935098545, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
-  local Label = homeTab:CreateLabel("New Key soon: April 28, 2025", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
+  local Label = homeTab:CreateLabel("New Key soon: April 28, 2025", 14565902150, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
-  local Label = homeTab:CreateLabel("Game: Horrific Housing", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
+  local Label = homeTab:CreateLabel("Game: Horrific Housing", 133603530536689, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
-  local Label = homeTab:CreateLabel("Status: Working", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
+  local Label = homeTab:CreateLabel("Status: Working", 4458804262, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
-  local Label = homeTab:CreateLabel("Script by Not's hub", 4483362458, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
+  local Label = homeTab:CreateLabel("Script by Not's hub", 86591853167234, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
   
 local itemsTab = Window:CreateTab("Items", 129306263749313)
  
