@@ -357,6 +357,49 @@ local Button = antiTab:CreateButton({
     end,
 })
 
+local Button = antiTab:CreateButton({
+    Name = "Anti-Lag",
+    Callback = function()
+        local function removeTexturesAndMeshes(obj)
+            if obj:IsA("BasePart") then
+                if obj:IsA("MeshPart") then
+                    obj.TextureID = ""
+                end
+                obj.Material = Enum.Material.Plastic
+                local mesh = obj:FindFirstChildOfClass("SpecialMesh")
+                if mesh then
+                    mesh.MeshId = ""
+                    mesh.TextureId = ""
+                end
+            elseif obj:IsA("Decal") or obj:IsA("Texture") or obj:IsA("SurfaceAppearance") then
+                if obj:IsA("SurfaceAppearance") then
+                    obj.ColorMap = ""
+                    obj.MetalnessMap = ""
+                    obj.NormalMap = ""
+                    obj.RoughnessMap = ""
+                else
+                    obj.Texture = ""
+                end
+            end
+        end
+
+        for _, obj in ipairs(game:GetDescendants()) do
+            removeTexturesAndMeshes(obj)
+            if obj:IsA("Accessory") or obj:IsA("Shirt") or obj:IsA("Pants") or obj:IsA("ShirtGraphic") then
+                obj:Destroy()
+            end
+        end
+
+        if game.Lighting:FindFirstChildOfClass("Sky") then
+            game.Lighting:FindFirstChildOfClass("Sky"):Destroy()
+        end
+
+        if workspace.Terrain:FindFirstChildOfClass("Clouds") then
+            workspace.Terrain:FindFirstChildOfClass("Clouds"):Destroy()
+        end
+    end
+})
+
 
 local trollTab = Window:CreateTab("Troll", 9213175381)
  
