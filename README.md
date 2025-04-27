@@ -244,7 +244,7 @@ local Button = itemsTab:CreateButton({
 
 local potionsTab = Window:CreateTab("Effects", 13518130183)
  
-  local Section = potionsTab:CreateSection("Potions Settings")
+  local Section = potionsTab:CreateSection("Effects Settings")
   
 
   local Button = potionsTab:CreateButton({
