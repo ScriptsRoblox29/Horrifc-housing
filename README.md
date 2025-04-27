@@ -800,17 +800,6 @@ local Button = tpTab:CreateButton({
 local playerTab = Window:CreateTab("Player", 7992557358)
  
   local Section = playerTab:CreateSection("Player Settings")
-
-
-local Button = playerTab:CreateButton({
-    Name = "Infinite Jump",
-    Callback = function()
-        local InfiniteJumpEnabled = true
-game:GetService("UserInputService").JumpRequest:connect(function()
-	if InfiniteJumpEnabled then
-		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-	end
-})
   
 
 
