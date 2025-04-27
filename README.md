@@ -531,6 +531,31 @@ local Toggle = trollTab:CreateToggle({
     end
 })
 
+local tpTab = Window:CreateTab("Teleport", 6723742952)
+ 
+  local Section = tpTab:CreateSection("Teleport Settings")
+
+
+local Input = tpTab:CreateInput({
+    Name = "Teleport to Player",
+    CurrentValue = "",
+    PlaceholderText = "Enter DisplayName",
+    RemoveTextAfterFocusLost = false,
+    Flag = "TeleportInput",
+    Callback = function(Text)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local hrp = character:WaitForChild("HumanoidRootPart")
+
+        for _, plr in ipairs(game.Players:GetPlayers()) do
+            if plr.DisplayName == Text and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+                hrp.CFrame = plr.Character.HumanoidRootPart.CFrame
+                break
+            end
+        end
+    end
+})
+
  
   Rayfield:Notify({
      Title = "Script by Not's Hub",
