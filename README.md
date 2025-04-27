@@ -796,6 +796,59 @@ local Button = tpTab:CreateButton({
     end
 })
 
+
+local playerTab = Window:CreateTab("Player", 7992557358)
+ 
+  local Section = playerTab:CreateSection("Player Settings")
+
+
+  local Toggle = playerTab:CreateToggle({
+    Name = "Infinite Jump",
+    CurrentValue = false,
+    Flag = "DoubleJump",
+    Callback = function(Value)
+        getgenv().DoubleJumpEnabled = Value
+
+        if Value then
+            task.spawn(function()
+                local player = game.Players.LocalPlayer
+
+                local function setupDoubleJump(character)
+                    local humanoid = character:WaitForChild("Humanoid")
+                    local jumping = false
+                    local canDoubleJump = false
+
+                    humanoid.StateChanged:Connect(function(oldState, newState)
+                        if not getgenv().DoubleJumpEnabled then return end
+                        if newState == Enum.HumanoidStateType.Jumping then
+                            if not jumping then
+                                jumping = true
+                            elseif canDoubleJump then
+                                humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                                canDoubleJump = false
+                            end
+                        elseif newState == Enum.HumanoidStateType.Freefall then
+                            if jumping then
+                                canDoubleJump = true
+                            end
+                        elseif newState == Enum.HumanoidStateType.Landed then
+                            jumping = false
+                            canDoubleJump = false
+                        end
+                    end)
+                end
+
+                setupDoubleJump(player.Character or player.CharacterAdded:Wait())
+                player.CharacterAdded:Connect(function(char)
+                    if getgenv().DoubleJumpEnabled then
+                        setupDoubleJump(char)
+                    end
+                end)
+            end)
+        end
+    end
+})
+
  
   Rayfield:Notify({
      Title = "Script by Not's Hub",
