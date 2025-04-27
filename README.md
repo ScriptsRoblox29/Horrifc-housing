@@ -2,10 +2,10 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
  
  
  local Window = Rayfield:CreateWindow({
-     Name = "Horrifc housing",
+     Name = "Horrific housing",
      Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
      LoadingTitle = "Loading...",
-     LoadingSubtitle = "by Not's server",
+     LoadingSubtitle = "by Not's hub",
      Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
   
      DisableRayfieldPrompts = false,
@@ -32,7 +32,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
  
  
  
-  local mainTab = Window:CreateTab("Main", "crosshair")
+  local mainTab = Window:CreateTab("Main", 7539983773)
  
   local Section = mainTab:CreateSection("Main Settings")
 
@@ -90,7 +90,7 @@ local Button = mainTab:CreateButton({
 })
 
 
-local itemsTab = Window:CreateTab("Items", "crosshair")
+local itemsTab = Window:CreateTab("Items", 129306263749313)
  
   local Section = itemsTab:CreateSection("Items Settings")
 
@@ -242,7 +242,7 @@ local Button = itemsTab:CreateButton({
 })
 
 
-local potionsTab = Window:CreateTab("Potions", "crosshair")
+local potionsTab = Window:CreateTab("Effects", 13518130183)
  
   local Section = potionsTab:CreateSection("Potions Settings")
   
@@ -258,7 +258,7 @@ local potionsTab = Window:CreateTab("Potions", "crosshair")
     end
 })
 
-local guisTab = Window:CreateTab("Guis", "crosshair")
+local guisTab = Window:CreateTab("Guis", 103950363563606)
  
   local Section = guisTab:CreateSection("Guis Settings")
 
@@ -329,7 +329,7 @@ local Toggle = guisTab:CreateToggle({
     end
 })
 
-local antiTab = Window:CreateTab("Anti", "crosshair")
+local antiTab = Window:CreateTab("Anti", 13793170713)
  
   local Section = antiTab:CreateSection("Anti Settings")
 
@@ -358,7 +358,7 @@ local Button = antiTab:CreateButton({
 })
 
 
-local trollTab = Window:CreateTab("Troll", "crosshair")
+local trollTab = Window:CreateTab("Troll", 9213175381)
  
   local Section = trollTab:CreateSection("Troll Settings")
 
@@ -533,7 +533,7 @@ local Toggle = trollTab:CreateToggle({
 
  
   Rayfield:Notify({
-     Title = "Script by Not's server",
+     Title = "Script by Not's Hub",
      Content = "loaded",
      Duration = 6.5,
      Image = 4483362458,
