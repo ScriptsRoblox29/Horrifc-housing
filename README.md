@@ -63,6 +63,38 @@ local Toggle = mainTab:CreateToggle({
 })
 
 
+local Button = mainTab:CreateButton({
+    Name = "Get all items and Infinite Tokens; 1 Token needed",
+    Callback = function()
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Not's Hub",
+            Text = "Are you sure you want to run this? This may lag and you will need to rejoin.",
+            Duration = 5,
+            Button1 = "Yes",
+            Button2 = "No",
+            Callback = function(choice)
+                if choice == "Yes" then
+                    local args1 = {[1] = 0.000000000000000000001, [2] = "HouseChest"}
+                    game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args1))
+
+                    local args2 = {[1] = 0.000000000000000000001, [2] = "Furniture"}
+                    game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args2))
+
+                    local args3 = {[1] = 0.000000000000000000001, [2] = "EggPets"}
+                    game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args3))
+
+                    local args4 = {[1] = 0.000000000000000000001, [2] = "Ornament"}
+                    game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args4))
+
+                    local args5 = {[1] = 0.000000000000000000001, [2] = "Death"}
+                    game:GetService("ReplicatedStorage"):WaitForChild("ShopPurchase"):FireServer(unpack(args5))
+                end
+            end
+        })
+    end
+})
+
+
 local itemsTab = Window:CreateTab("Items", "crosshair")
  
   local Section = itemsTab:CreateSection("Items Settings")
