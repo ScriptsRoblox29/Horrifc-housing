@@ -20,13 +20,13 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
   
      KeySystem = true, -- Set this to true to use our key system
      KeySettings = {
-        Title = "Key",
+        Title = "0000-0000-0000",
         Subtitle = "Key System",
         Note = "https://discord.gg/c4Ctp35FHm", -- Use this to tell the user how to get a key
         FileName = "skibidi key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
         SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
         GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-        Key = {"Key_4810", "Key_9990"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+        Key = {"38c2-291a-2c81", "Key_9990"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
      }
   }) 
  
@@ -38,7 +38,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
   local Label = homeTab:CreateLabel("Not Patched", 6935098545, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
-  local Label = homeTab:CreateLabel("New Key soon: April 28, 2025", 14565902150, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
+  local Label = homeTab:CreateLabel("New Key soon: May 2, 2025", 14565902150, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
   local Label = homeTab:CreateLabel("Game: Horrific Housing", 133603530536689, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
