@@ -18,7 +18,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
      },
  
   
-     KeySystem = true, -- Set this to true to use our key system
+     KeySystem = false, -- Set this to true to use our key system
      KeySettings = {
         Title = "Key System",
         Subtitle = "0000-0000-0000",
