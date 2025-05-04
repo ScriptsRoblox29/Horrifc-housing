@@ -37,9 +37,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
   local Section = homeTab:CreateSection("Starting place")
 
   local Label = homeTab:CreateLabel("Not Patched", 6935098545, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
-
-  local Label = homeTab:CreateLabel("New Key soon: May 2, 2025", 14565902150, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
-
+  
   local Label = homeTab:CreateLabel("Game: Horrific Housing", 133603530536689, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
 
   local Label = homeTab:CreateLabel("Status: Working", 4458804262, Color3.fromRGB(75, 75, 75), false) -- Title, Icon, Color, IgnoreTheme
@@ -849,13 +847,5 @@ local Input = playerTab:CreateInput({
      Title = "Script by Not's Hub",
      Content = "loaded",
      Duration = 6.5,
-     Image = 4483362458,
-  })
-
-
-Rayfield:Notify({
-     Title = "Important",
-     Content = "I recommend leaving videos, comments etc as private or only people with a link can enter, This makes the devs not censor and the script last longer",
-     Duration = 15,
      Image = 4483362458,
   })
